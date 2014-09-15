@@ -182,9 +182,8 @@ function CarouselDemoCtrl($scope) {
 function GetDataTarjetas($scope,$http){
   $http.get('dummieInfoTarjetas.js').
   success(function(data, status, headers, config) {
-  console.debug("success");
   $scope.tarjetas = data;
-  console.log($scope.tarjetas);
+
 
   //FILTRAR TARJETAS ACTIVAS
   for(var i = 0 ; i < $scope.tarjetas.length; i++){
@@ -196,7 +195,6 @@ function GetDataTarjetas($scope,$http){
   //LLAMAR SERVICIO DE SALDOS PARA TARJETA 0 y guardarlos en saldosTarjeta y movimientos para esa tarjeta
     $http.get('dummie.js').
     success(function(data, status, headers, config) {
-    console.debug("success");
     $scope.saldosTarjeta = data;
     }).
     error(function(data, status, headers, config) {
@@ -226,6 +224,8 @@ function GetDataTarjetas($scope,$http){
   
 }
 
+
+
 function GetDataTransacciones($scope,$http){
  // $http.get('dummieTransacciones.js').
 
@@ -235,6 +235,13 @@ function GetDataTransacciones($scope,$http){
   
   //$scope.transaccion = data;
   var transaccion = data;
+
+  if (transaccion.transacciones == null){
+    console.log("no hay nada");
+  }
+
+
+
   $scope.movimientosNacionales = [];
   $scope.movimientosInternacionales = [];
   var fecha ;
